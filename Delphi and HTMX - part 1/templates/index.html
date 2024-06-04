@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delphi & HTMX Demo</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  </head>
+  <body>
+    <h1 id="header">Delphi & HTMX Rocks!</h1>
+    <button hx-get="/helloworld" hx-target="#header">Click me</button>
+
+    <form hx-get="/edit" hx-swap="outerHTML">
+      <input type="text" name="edit" readonly />
+      <button>Edit</button>
+    </form>
+  </body>
+</html>
