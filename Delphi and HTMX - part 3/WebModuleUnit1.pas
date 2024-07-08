@@ -32,7 +32,8 @@ uses
   System.IOUtils,
   System.Character,
   HTMLTemplates,
-  Math;
+  Math,
+  System.NetEncoding;
 
 {$R *.dfm}
 
@@ -52,7 +53,8 @@ end;
 procedure TWebModule1.WebModule1SubmitAction(Sender: TObject;
   Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
 begin
-  var lResponse := Request.ContentFields.Values['edit'];
+  // sanitizing the received value avoids Cross-site scripting (XSS) - https://en.wikipedia.org/wiki/Cross-site_scripting
+  var lResponse := TNetEncoding.HTML.Encode(Request.ContentFields.Values['edit']);
   Response.Content := string.Format(HTMLTemplates.cSubmit, [lResponse, lResponse]);
 end;
 
